@@ -1,0 +1,23 @@
+Imię: Kamil
+Nazwisko: Jasiak
+Adres email: kamil.jasiak@vp.pl
+Grupa: 2ID21A
+
+Tematy projektu: Programowanie aspektowe, Object CSV Mapper
+
+Spis technologii: Windows 10, Intellij IDEA, Java, AspectJ
+
+Harmonogram pracy:
+* Etap 2 - przygotowanie środowiska oraz implementacja podstawowego programu Java + dociągnięcie niezbędnych bibliotek (AspectJ)
+* Etap 3 - implementacja Object CSV Mapper - mapowanie obiektu na plik CSV
+* Etap 4 - implementacja Object CSV Mapper - mapowanie pliku CSV na obiekt
+* Etap 5 - implementacja aspektów - prawdopodobnie beda to aspekty,
+           które będą liczyć czas działania mapowania oraz zapisywać informację o mapowaniu w logach
+* Etap 6 - połączenie aspektów z mapperem + testowanie
+* Etap 7 - testowanie + poprawki oraz "dopieszczenie" aplikacji (bug fixing and code cleaning)
+* Etap 8 - oddanie projektu
+
+Tematy projektów:
+Programowanie systemów rozproszonych: nie wybrano
+Praca inżynierska: Opracowanie aplikacji dla zwiedzających ogród zoologiczny
+Praca magisterska: nie wybrano
