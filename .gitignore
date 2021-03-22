@@ -10,5 +10,9 @@
 *.war
 *.ear
 
+out/
+.idea/
+.idea_modules/
 *.iml
-*.idea
+*.ipr
+*.iws
