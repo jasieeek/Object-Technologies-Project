@@ -5,8 +5,4 @@ public class Car extends Vehicle {
 //    zamienic na enum/interface
     private String body;
     private String transmission;
-
-    public enum DrivingMode {
-        SHAFT_DRIVE, CHAIN_DRIVE, BELT_DRIVE
-    }
 }
