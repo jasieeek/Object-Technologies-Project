@@ -2,6 +2,7 @@ package pl.jasiek.app.config;
 
 import pl.jasiek.app.controller.Command;
 import pl.jasiek.app.controller.ExitCommand;
+import pl.jasiek.app.controller.RefreshCommand;
 import pl.jasiek.app.view.ConsoleView;
 import pl.jasiek.app.view.View;
 import pl.jasiek.app.view.menu.ConsoleMenu;
@@ -18,6 +19,7 @@ public class Config {
     public List<Command> initializeCommands(){
         List<Command> commandList = new ArrayList<>();
 //        commandList.add(new ShowAllClientsCommand(clientMemoryRepo, view));
+        commandList.add(new RefreshCommand());
         commandList.add(new ExitCommand());
 
         return commandList;

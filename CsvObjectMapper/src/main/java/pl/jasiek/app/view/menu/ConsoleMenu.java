@@ -21,7 +21,12 @@ public class ConsoleMenu {
     }
 
     public Command getChoice(List<Command> commands) {
-        int choice = view.readInt("Choose");
-        return commands.get(choice);
+        try {
+            int choice = view.readInt("Choose");
+            return commands.get(choice);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Wprowadzona wartosc jest nieprawidlowa, prosze wpisac poprawna wartosc!");
+        }
+        return commands.stream().filter(command -> command.getLabel().equals("Refresh")).findFirst().orElse(null);
     }
 }
