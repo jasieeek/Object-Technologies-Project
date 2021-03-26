@@ -1,10 +1,12 @@
 package pl.jasiek.app.model;
 
+import lombok.Data;
+import pl.jasiek.app.model.additions.CarType;
 import pl.jasiek.app.model.additions.TransmissionType;
-import pl.jasiek.app.model.additions.VehicleType;
 
+@Data
 public class Car extends Vehicle {
     private String fuelType;
-    private VehicleType type;
+    private CarType type;
     private TransmissionType transmission;
 }
