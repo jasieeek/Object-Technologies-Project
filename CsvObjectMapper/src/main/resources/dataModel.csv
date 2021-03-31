@@ -1,0 +1,6 @@
+Car
+make,string
+model,string
+productionYear,year
+value,double
+color,string

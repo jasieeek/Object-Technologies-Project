@@ -1,4 +1,4 @@
-package pl.jasiek.app.model;
+package pl.jasiek.app.model.vehicle;
 
 import lombok.Data;
 
