@@ -1,6 +1,7 @@
 package pl.jasiek.app.config;
 
 import pl.jasiek.app.controller.*;
+import pl.jasiek.app.mapper.DataMapper;
 import pl.jasiek.app.mapper.DataModelMapper;
 import pl.jasiek.app.repository.Repository;
 import pl.jasiek.app.repository.csv.ItemCsvRepo;
@@ -13,19 +14,24 @@ import java.util.List;
 
 public class Config {
     private View view = new ConsoleView();
-    private Repository vehicleCsvRepo = new ItemCsvRepo();
+    private Repository itemCsvRepo = new ItemCsvRepo();
+    private static DataModelMapper dataModelMapper = new DataModelMapper();
+    private DataMapper dataMapper = new DataMapper();
 
     public Config() {
         initializeDataModel();
+        initializeRepository();
     }
 
     public List<Command> initializeCommands(){
         List<Command> commandList = new ArrayList<>();
 //        commandList.add(new ShowAllClientsCommand(clientMemoryRepo, view));
         commandList.add(new ShowDataModelCommand());
-        commandList.add(new AddItemCommand(view, vehicleCsvRepo));
+        commandList.add(new ShowItemsCommand(view, itemCsvRepo));
+        commandList.add(new AddItemCommand(view, itemCsvRepo));
+        commandList.add(new RemoveItemCommand(view, itemCsvRepo));
         commandList.add(new RefreshCommand());
-        commandList.add(new ExitCommand());
+        commandList.add(new ExitCommand(dataModelMapper, dataMapper, itemCsvRepo));
 
         return commandList;
     }
@@ -34,9 +40,13 @@ public class Config {
         return new ConsoleMenu(view);
     }
 
-    private void initializeDataModel() {
+    private static void initializeDataModel() {
 //        pobranie z pliku dataModel.csv wszystkich pol i zapisanie ich w klasie ItemDetails ( moze jako singleton )
-        DataModelMapper dataModelMapper = new DataModelMapper();
         dataModelMapper.importData();
+    }
+
+    private void initializeRepository() {
+//        pobranie z pliku dataModel.csv wszystkich pol i zapisanie ich w klasie ItemDetails ( moze jako singleton )
+        itemCsvRepo.init(dataMapper.importData());
     }
 }

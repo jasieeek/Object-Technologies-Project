@@ -4,12 +4,12 @@ import pl.jasiek.app.repository.Repository;
 import pl.jasiek.app.view.View;
 
 public class ShowItemsCommand implements Command {
-    private Repository itemRepository;
     private View view;
+    private Repository itemRepository;
 
-    public ShowItemsCommand(Repository itemRepository, View view) {
-        this.itemRepository = itemRepository;
+    public ShowItemsCommand(View view, Repository itemRepository) {
         this.view = view;
+        this.itemRepository = itemRepository;
     }
 
     @Override

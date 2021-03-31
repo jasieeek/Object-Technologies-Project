@@ -1,8 +1,23 @@
 package pl.jasiek.app.controller;
 
-public class ExitCommand implements Command{
+import pl.jasiek.app.mapper.DataMapper;
+import pl.jasiek.app.mapper.DataModelMapper;
+import pl.jasiek.app.repository.Repository;
+
+public class ExitCommand implements Command {
+    private DataModelMapper dataModelMapper;
+    private DataMapper dataMapper;
+    private Repository repository;
+
+    public ExitCommand(DataModelMapper dataModelMapper, DataMapper dataMapper, Repository repository) {
+        this.dataModelMapper = dataModelMapper;
+        this.dataMapper = dataMapper;
+        this.repository = repository;
+    }
+
     @Override
     public void execute() {
+        dataMapper.exportData(repository.findAll());
         System.exit(1);
     }
 
