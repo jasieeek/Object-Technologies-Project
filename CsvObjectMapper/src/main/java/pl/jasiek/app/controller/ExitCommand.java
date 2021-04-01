@@ -17,7 +17,9 @@ public class ExitCommand implements Command {
 
     @Override
     public void execute() {
-        dataMapper.exportData(repository.findAll());
+        System.out.println("Starting saving data");
+        dataMapper.exportItemList(repository.findAll());
+        System.out.println("Ending saving data");
         System.exit(1);
     }
 

@@ -4,7 +4,6 @@ import pl.jasiek.app.model.Item;
 import pl.jasiek.app.repository.Repository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ItemCsvRepo implements Repository {
@@ -25,7 +24,7 @@ public class ItemCsvRepo implements Repository {
         if (itemList.size() == 0) {
             return 0;
         } else {
-            return itemList.get(itemList.size()-1).getId() + 1;
+            return itemList.get(itemList.size() - 1).getId() + 1;
         }
     }
 
@@ -35,7 +34,7 @@ public class ItemCsvRepo implements Repository {
     }
 
     @Override
-    public Collection<Item> findAll() {
+    public List<Item> findAll() {
         return itemList;
     }
 }

@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class DataMapper {
@@ -23,10 +22,10 @@ public class DataMapper {
         this.itemDetails = ItemDetails.getInstance();
     }
 
-    public List<Item> importData() {
+    public List<Item> importItemList() {
+        List<Item> result = new ArrayList<>();
         String line;
-        List<Item> itemList = new ArrayList<>();
-        final int counter = itemDetails.getFields().size();
+        final int counter = itemDetails.getFields().size() + 1;
 
         try (BufferedReader br = new BufferedReader(new FileReader(PATH_TO_REPO_CSV))) {
             while ((line = br.readLine()) != null) {
@@ -34,16 +33,16 @@ public class DataMapper {
                 Item item = new Item();
                 item.setId(Integer.parseInt(splitLine[0]));
                 item.setValues(new ArrayList<>(Arrays.asList(splitLine).subList(1, counter)));
-                itemList.add(item);
+                result.add(item);
             }
         } catch (IOException e) {
 //            do logow
             System.out.println("Error with load csv file");
         }
-        return itemList;
+        return result;
     }
 
-    public void exportData(Collection<Item> items) {
+    public void exportItemList(List<Item> items) {
         Path path = Paths.get(PATH_TO_REPO_CSV);
         ArrayList<String> listToSave = new ArrayList<>();
         for (Item item : items) {

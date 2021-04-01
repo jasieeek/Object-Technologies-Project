@@ -6,6 +6,10 @@ import pl.jasiek.app.model.ItemDetails;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
@@ -19,7 +23,7 @@ public class DataModelMapper {
         this.itemDetails = ItemDetails.getInstance();
     }
 
-    public void importData() {
+    public void importDataModel() {
         String line;
         Map<String, String> fields = new TreeMap<>();
 
@@ -44,20 +48,13 @@ public class DataModelMapper {
 
 
     public void exportData(Collection<Item> items) {
-
+        Path path = Paths.get(PATH_TO_DATA_MODEL);
+        ArrayList<String> listToSave = new ArrayList<>();
+        items.forEach(item -> listToSave.add(item.toCsvString()));
+        try {
+            Files.write(path, listToSave);
+        } catch (IOException e) {
+            System.out.println("Unable to save file currencies data :(");
+        }
     }
-
-//    public void saveCurrenciesData(Collection<Currency> currencies) {
-//        Path path = Paths.get(PATH_TO_CURRENCIES_CSV);
-//        ArrayList<String> listToSave = new ArrayList<>();
-//        for (Currency currency : currencies) {
-//            String s = currency.toStringCsv();
-//            listToSave.add(s);
-//        }
-//        try {
-//            Files.write(path, listToSave);
-//        } catch (IOException e) {
-//            System.out.println("Unable to save file currencies data :(");
-//        }
-//    }
 }

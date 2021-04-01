@@ -42,11 +42,15 @@ public class Config {
 
     private static void initializeDataModel() {
 //        pobranie z pliku dataModel.csv wszystkich pol i zapisanie ich w klasie ItemDetails ( moze jako singleton )
-        dataModelMapper.importData();
+        System.out.println("Starting importing data model...");
+        dataModelMapper.importDataModel();
+        System.out.println("Ending importing data model");
     }
 
     private void initializeRepository() {
-//        pobranie z pliku dataModel.csv wszystkich pol i zapisanie ich w klasie ItemDetails ( moze jako singleton )
-        itemCsvRepo.init(dataMapper.importData());
+//        pobranie z pliku repository.csv wszystkich itemow i zapisanie ich w repo ( moze jako singleton )
+        System.out.println("Starting importing data...");
+        itemCsvRepo.init(dataMapper.importItemList());
+        System.out.println("Ending importing data");
     }
 }
