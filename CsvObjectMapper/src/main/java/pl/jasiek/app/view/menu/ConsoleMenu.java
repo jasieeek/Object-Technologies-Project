@@ -27,6 +27,9 @@ public class ConsoleMenu {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Wprowadzona wartosc jest nieprawidlowa, prosze wpisac poprawna wartosc!");
         }
-        return commands.stream().filter(command -> command.getLabel().equals("Refresh")).findFirst().orElse(null);
+        return commands.stream()
+                .filter(command -> command.getLabel().equals("Refresh"))
+                .findFirst()
+                .orElse(null);
     }
 }

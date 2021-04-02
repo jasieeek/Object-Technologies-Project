@@ -29,6 +29,7 @@ public class Config {
         commandList.add(new ShowDataModelCommand());
         commandList.add(new ShowItemsCommand(view, itemCsvRepo));
         commandList.add(new AddItemCommand(view, itemCsvRepo));
+        commandList.add(new ModifyItemCommand(view, itemCsvRepo));
         commandList.add(new RemoveItemCommand(view, itemCsvRepo));
         commandList.add(new RefreshCommand());
         commandList.add(new ExitCommand(dataModelMapper, dataMapper, itemCsvRepo));

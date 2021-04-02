@@ -5,9 +5,11 @@ import pl.jasiek.app.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ItemCsvRepo implements Repository {
     private List<Item> itemList = new ArrayList<>();
+
     @Override
     public long create(Item item) {
         itemList.add(item);
@@ -17,6 +19,17 @@ public class ItemCsvRepo implements Repository {
     @Override
     public void init(List<Item> importData) {
         itemList.addAll(importData);
+    }
+
+    @Override
+    public void modifyById(int id, Map<String, String> modifiedFields) {
+        Item modifiedItem = itemList.get(id);
+        modifiedItem.setFields(modifiedFields);
+    }
+
+    @Override
+    public Item findById(int id) {
+        return itemList.get(id);
     }
 
     @Override

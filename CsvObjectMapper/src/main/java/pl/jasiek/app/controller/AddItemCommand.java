@@ -5,8 +5,9 @@ import pl.jasiek.app.model.ItemDetails;
 import pl.jasiek.app.repository.Repository;
 import pl.jasiek.app.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 
 public class AddItemCommand implements Command {
     private View view;
@@ -21,9 +22,10 @@ public class AddItemCommand implements Command {
 
     @Override
     public void execute() {
+        // wyswietl data model
         Item item = new Item();
         item.setId(repository.generateId());
-        item.setValues(readFields());
+        item.setFields(readFields());
         repository.create(item);
     }
 
@@ -32,16 +34,16 @@ public class AddItemCommand implements Command {
         return "Add item";
     }
 
-    private List<String> readFields() {
-        List<String> fieldValues = new ArrayList<>();
+    private Map<String, String> readFields() {
+        Map<String, String> fields = new TreeMap<>();
         itemDetails.getFields().forEach((key, value) -> {
-            String stringValue = view.readValueAsString(key, value);
+            String stringValue = view.readValueAsString(key, value, false);
             if (!stringValue.equals("")) {
-                fieldValues.add(stringValue);
+                fields.put(key, stringValue);
             } else {
-                System.out.println("Nieprawidlowa wartosc fielda w modelu");
+                System.out.println("Incorrect field value in model! Please contact administrator!");
             }
         });
-        return fieldValues;
+        return fields;
     }
 }

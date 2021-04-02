@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -47,7 +47,7 @@ public class DataModelMapper {
     }
 
 
-    public void exportData(Collection<Item> items) {
+    public void exportData(List<Item> items) {
         Path path = Paths.get(PATH_TO_DATA_MODEL);
         ArrayList<String> listToSave = new ArrayList<>();
         items.forEach(item -> listToSave.add(item.toCsvString()));

@@ -14,8 +14,9 @@ public class RemoveItemCommand implements Command {
 
     @Override
     public void execute() {
-        int id = view.readInt("ID of the item to remove");
+        int id = view.readInt("Type ID of the item to remove");
         repository.remove(id);
+        System.out.println("The item with id " + id + " has been removed");
         getIDsRight(id);
     }
 
