@@ -7,9 +7,6 @@ import pl.jasiek.app.view.menu.ConsoleMenu;
 import java.util.List;
 
 public class Main {
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_RESET = "\u001B[0m";
-
     public static void main(String[] args) {
         Config config = new Config();
         List<Command> commandList = config.initializeCommands();

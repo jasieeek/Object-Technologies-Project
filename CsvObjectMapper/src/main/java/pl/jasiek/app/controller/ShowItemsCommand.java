@@ -2,15 +2,12 @@ package pl.jasiek.app.controller;
 
 import pl.jasiek.app.model.ItemDetails;
 import pl.jasiek.app.repository.Repository;
-import pl.jasiek.app.view.View;
 
 public class ShowItemsCommand implements Command {
-    private View view;
     private Repository itemRepository;
     private ItemDetails itemDetails;
 
-    public ShowItemsCommand(View view, Repository itemRepository) {
-        this.view = view;
+    public ShowItemsCommand(Repository itemRepository) {
         this.itemRepository = itemRepository;
         this.itemDetails = ItemDetails.getInstance();
     }
