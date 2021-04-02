@@ -45,7 +45,7 @@ public class ModifyItemCommand implements Command {
         Map<String, String> fields = new TreeMap<>();
         Item item = repository.findById(id);
         itemDetails.getFields().forEach((key, value) -> {
-            String stringValue = view.readValueAsString("NEW " + key, value, true);
+            String stringValue = view.readFieldValueAsString("NEW " + key, value, true);
             if (stringValue.equals("")) {
                 System.out.println("Wrong field type in data model! Please contact a administrator!");
             } else if (stringValue.equals("0")) {

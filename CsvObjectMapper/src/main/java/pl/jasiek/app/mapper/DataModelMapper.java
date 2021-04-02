@@ -1,16 +1,10 @@
 package pl.jasiek.app.mapper;
 
-import pl.jasiek.app.model.Item;
 import pl.jasiek.app.model.ItemDetails;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -43,18 +37,6 @@ public class DataModelMapper {
         } catch (IOException e) {
 //            do logow
             System.out.println("Error with load csv file");
-        }
-    }
-
-
-    public void exportData(List<Item> items) {
-        Path path = Paths.get(PATH_TO_DATA_MODEL);
-        ArrayList<String> listToSave = new ArrayList<>();
-        items.forEach(item -> listToSave.add(item.toCsvString()));
-        try {
-            Files.write(path, listToSave);
-        } catch (IOException e) {
-            System.out.println("Unable to save file currencies data :(");
         }
     }
 }

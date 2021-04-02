@@ -37,7 +37,7 @@ public class AddItemCommand implements Command {
     private Map<String, String> readFields() {
         Map<String, String> fields = new TreeMap<>();
         itemDetails.getFields().forEach((key, value) -> {
-            String stringValue = view.readValueAsString(key, value, false);
+            String stringValue = view.readFieldValueAsString(key, value, false);
             if (!stringValue.equals("")) {
                 fields.put(key, stringValue);
             } else {
