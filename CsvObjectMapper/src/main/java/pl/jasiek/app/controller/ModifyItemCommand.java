@@ -2,18 +2,18 @@ package pl.jasiek.app.controller;
 
 import pl.jasiek.app.model.Item;
 import pl.jasiek.app.model.ItemDetails;
-import pl.jasiek.app.repository.Repository;
+import pl.jasiek.app.repository.ItemRepository;
 import pl.jasiek.app.view.View;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class ModifyItemCommand implements Command {
     private View view;
-    private Repository repository;
+    private ItemRepository repository;
     private ItemDetails itemDetails;
 
-    public ModifyItemCommand(View view, Repository repository) {
+    public ModifyItemCommand(View view, ItemRepository repository) {
         this.view = view;
         this.repository = repository;
         this.itemDetails = ItemDetails.getInstance();
@@ -42,7 +42,7 @@ public class ModifyItemCommand implements Command {
     }
 
     private Map<String, String> readFields(int id) {
-        Map<String, String> fields = new TreeMap<>();
+        Map<String, String> fields = new LinkedHashMap<>();
         Item item = repository.findById(id);
         itemDetails.getFields().forEach((key, value) -> {
             String stringValue = view.readFieldValueAsString("NEW " + key, value, true);
@@ -53,7 +53,6 @@ public class ModifyItemCommand implements Command {
                 fields.put(key, item.getFields().get(key));
             } else {
                 fields.put(key, stringValue);
-
             }
         });
         return fields;

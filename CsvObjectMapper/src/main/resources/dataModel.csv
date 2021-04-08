@@ -1,6 +1,5 @@
-Car
-make,string
-model,string
-productionYear,year
+Food
+name,string
+isVege,string
+calories,double
 value,double
-color,string

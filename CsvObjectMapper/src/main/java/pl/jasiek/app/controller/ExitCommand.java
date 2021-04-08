@@ -1,23 +1,20 @@
 package pl.jasiek.app.controller;
 
 import pl.jasiek.app.mapper.DataMapper;
-import pl.jasiek.app.mapper.DataModelMapper;
-import pl.jasiek.app.repository.Repository;
+import pl.jasiek.app.repository.ItemRepository;
 
 public class ExitCommand implements Command {
-    private DataModelMapper dataModelMapper;
     private DataMapper dataMapper;
-    private Repository repository;
+    private ItemRepository repository;
 
-    public ExitCommand(DataModelMapper dataModelMapper, DataMapper dataMapper, Repository repository) {
-        this.dataModelMapper = dataModelMapper;
+    public ExitCommand(DataMapper dataMapper, ItemRepository repository) {
         this.dataMapper = dataMapper;
         this.repository = repository;
     }
 
     @Override
     public void execute() {
-        System.out.println("Starting saving data");
+        System.out.println("Starting saving data...");
         dataMapper.exportItemList(repository.findAll());
         System.out.println("Ending saving data");
         System.exit(1);

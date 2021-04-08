@@ -1,13 +1,13 @@
 package pl.jasiek.app.controller;
 
 import pl.jasiek.app.model.ItemDetails;
-import pl.jasiek.app.repository.Repository;
+import pl.jasiek.app.repository.ItemRepository;
 
 public class ShowItemsCommand implements Command {
-    private Repository itemRepository;
+    private ItemRepository itemRepository;
     private ItemDetails itemDetails;
 
-    public ShowItemsCommand(Repository itemRepository) {
+    public ShowItemsCommand(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
         this.itemDetails = ItemDetails.getInstance();
     }
@@ -16,7 +16,7 @@ public class ShowItemsCommand implements Command {
     public void execute() {
         printDataModelRow();
         itemRepository.findAll().forEach(System.out::println);
-        System.out.println();
+        System.out.println("\n--------------------End--------------------\n");
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ShowItemsCommand implements Command {
 
     private void printDataModelRow() {
         StringBuilder result = new StringBuilder();
-        final String dashes = "----------";
+        final String dashes = "--------------------";
         result.append("\n");
         result.append(dashes);
         result.append(itemDetails.getName());

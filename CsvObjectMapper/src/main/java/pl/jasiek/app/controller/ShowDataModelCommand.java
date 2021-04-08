@@ -11,12 +11,11 @@ public class ShowDataModelCommand implements Command {
 
     @Override
     public void execute() {
-        System.out.println("----------Data model----------\n");
+        System.out.println("--------------------Data model--------------------\n");
         System.out.println("Model name: " + itemDetails.getName());
         System.out.println("\nModel fields: ");
-        itemDetails.getFields().entrySet()
-                .forEach(System.out::println);
-        System.out.println("\n----------End----------\n");
+        itemDetails.getFields().forEach((key, value) -> System.out.println(key + ": " + value));
+        System.out.println("\n--------------------End--------------------\n");
     }
 
     @Override

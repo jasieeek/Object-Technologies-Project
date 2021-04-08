@@ -17,7 +17,7 @@ public class Item {
         result.append(id);
         result.append(" | ");
         fields.values().forEach((value) -> result.append(value).append(" | "));
-        return result.toString();
+        return result.toString().trim();
     }
 
     public String toCsvString() {

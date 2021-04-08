@@ -5,7 +5,7 @@ import pl.jasiek.app.model.Item;
 import java.util.List;
 import java.util.Map;
 
-public interface Repository {
+public interface ItemRepository {
     long create(Item item);
     int generateId();
     void remove(int id);

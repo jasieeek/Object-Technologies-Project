@@ -1,13 +1,13 @@
 package pl.jasiek.app.repository.csv;
 
 import pl.jasiek.app.model.Item;
-import pl.jasiek.app.repository.Repository;
+import pl.jasiek.app.repository.ItemRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ItemCsvRepo implements Repository {
+public class ItemRepo implements ItemRepository {
     private List<Item> itemList = new ArrayList<>();
 
     @Override

@@ -7,10 +7,17 @@ import pl.jasiek.app.view.menu.ConsoleMenu;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    private static ConsoleMenu menu;
+    private static List<Command> commandList;
+
+    private static void init() {
         Config config = new Config();
-        List<Command> commandList = config.initializeCommands();
-        ConsoleMenu menu = config.initializeMenu();
+        menu = config.initializeMenu();
+        commandList = config.initializeCommands();
+    }
+
+    public static void main(String[] args) {
+        init();
 
         while(true) {
             menu.show(commandList);

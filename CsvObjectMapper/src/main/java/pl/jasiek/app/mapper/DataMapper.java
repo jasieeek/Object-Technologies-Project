@@ -10,9 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class DataMapper {
     private static final String PATH_TO_REPO_CSV = "src\\main\\resources\\repository.csv";
@@ -32,7 +32,7 @@ public class DataMapper {
                 String[] splitLine = line.split(COMA);
                 Item item = new Item();
                 item.setId(Integer.parseInt(splitLine[0]));
-                Map<String, String> fields = new TreeMap<>();
+                Map<String, String> fields = new LinkedHashMap<>();
                 List<String> fieldNames = new ArrayList<>(itemDetails.getFields().keySet());
                 for (int i = 0; i < fieldNames.size(); i++) {
                     fields.put(fieldNames.get(i), splitLine[i + 1]);

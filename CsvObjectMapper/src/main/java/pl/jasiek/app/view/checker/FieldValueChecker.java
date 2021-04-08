@@ -2,15 +2,9 @@ package pl.jasiek.app.view.checker;
 
 import pl.jasiek.app.view.ConsoleView;
 
-public class FieldValueChecker extends ConsoleView {
-    public static String checkEmptyFieldValue(String value) {
-        while (value.equals("")) {
-            System.out.println("You type an empty value! Please type something!");
-            value = scanner.nextLine();
-        }
-        return value;
-    }
+import java.time.Year;
 
+public class FieldValueChecker extends ConsoleView {
     public static String checkFieldValue(String fieldType, String value) {
         Object result;
         switch (fieldType) {
@@ -38,27 +32,43 @@ public class FieldValueChecker extends ConsoleView {
         return result.toString();
     }
 
+    public static String checkEmptyFieldValue(String value) {
+        while (value.equals("")) {
+            System.out.println("You type an empty value! Please type something!");
+            value = scanner.nextLine();
+        }
+        return value;
+    }
+
     private static String checkString(String value) {
-        // sprawdz czy to jest jedno slowo lub dwuczlonowe
         return value.isEmpty() ? "-1" : value;
     }
 
     private static double checkDouble(String value) {
         try {
-            return Double.parseDouble(value);
+            double parseDouble = Double.parseDouble(value);
+            if (parseDouble < 2000000) {
+                return parseDouble;
+            }
         } catch (NumberFormatException e) {
             System.out.println("Wrong value, please type a number that match x.xx format!");
             return -1;
         }
+        System.out.println("Wrong value, please type a number less than 2 000 000!");
+        return -1;
     }
 
     private static int checkYear(String value) {
-        // przerobic zeby tylko zwracal 4 cyfry z zakresu 1920-currentYear
         try {
-            return Integer.parseInt(value);
+            int parseInt = Integer.parseInt(value);
+            if (parseInt > 0 && parseInt <= Year.now().getValue()) {
+                return parseInt;
+            }
         } catch (NumberFormatException e) {
             System.out.println("Wrong value, please type a number!");
             return -1;
         }
+        System.out.println("Wrong value, please type a number from 1920 to current year!");
+        return -1;
     }
 }

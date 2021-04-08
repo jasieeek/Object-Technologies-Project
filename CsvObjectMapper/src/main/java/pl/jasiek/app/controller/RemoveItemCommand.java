@@ -1,13 +1,13 @@
 package pl.jasiek.app.controller;
 
-import pl.jasiek.app.repository.Repository;
+import pl.jasiek.app.repository.ItemRepository;
 import pl.jasiek.app.view.View;
 
 public class RemoveItemCommand implements Command {
     private View view;
-    private Repository repository;
+    private ItemRepository repository;
 
-    public RemoveItemCommand(View view, Repository repository) {
+    public RemoveItemCommand(View view, ItemRepository repository) {
         this.view = view;
         this.repository = repository;
     }
