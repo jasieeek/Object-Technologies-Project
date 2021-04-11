@@ -1,15 +1,30 @@
 package pl.jasiek.app.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Map;
 
-@Getter
-@Setter
 public class ItemDetails {
     private String name;
     private Map<String, String> fields;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Map<String, String> getFields() {
+        return fields;
+    }
+
+    public void setFields(Map<String, String> fields) {
+        this.fields = fields;
+    }
+
+    public static void setInstance(ItemDetails instance) {
+        ItemDetails.instance = instance;
+    }
 
     private static ItemDetails instance = new ItemDetails();
 

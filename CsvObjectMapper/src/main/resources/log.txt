@@ -1,0 +1,5 @@
+
+[2021-04-11 02:49:49] The item with id 5 has been removed!
+[2021-04-11 04:06:02] The item with id 4 has been removed!
+[2021-04-11 04:07:12] The item with id 2 has been removed!
+[2021-04-11 04:12:42] The item with id 2 has been removed!

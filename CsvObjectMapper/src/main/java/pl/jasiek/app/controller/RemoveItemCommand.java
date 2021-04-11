@@ -16,7 +16,8 @@ public class RemoveItemCommand implements Command {
     public void execute() {
         int id = view.readInt("Type ID of the item to remove");
         repository.remove(id);
-        System.out.println("The item with id " + id + " has been removed");
+//        System.out.println("The item with id " + id + " has been removed");
+        view.logging("The item with id " + id + " has been removed!");
         getIDsRight(id);
     }
 

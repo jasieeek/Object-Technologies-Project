@@ -2,9 +2,15 @@ package pl.jasiek.app.view;
 
 import pl.jasiek.app.view.checker.FieldValueChecker;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ConsoleView implements View {
+    private static final String LOG_FILE_PATH = "src\\main\\resources\\log.txt";
     protected static Scanner scanner;
 
     public ConsoleView() {
@@ -36,6 +42,31 @@ public class ConsoleView implements View {
         } catch (NumberFormatException e) {
             System.out.println("Wrong value, please type a number!");
             return -1;
+        }
+    }
+
+    @Override
+    public void clear() {
+        final int limit = 20;
+        for (int i = 0; i < limit; i++) {
+            System.out.println("\n");
+        }
+    }
+
+    @Override
+    public void logging(String message) {
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter(LOG_FILE_PATH, true));
+            String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss"));
+            writer.append("\n")
+                    .append("[")
+                    .append(currentTime)
+                    .append("] ")
+                    .append(message);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,15 +1,27 @@
 package pl.jasiek.app.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Map;
 
-@Setter
-@Getter
+
 public class Item {
     private int id;
     private Map<String, String> fields;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Map<String, String> getFields() {
+        return fields;
+    }
+
+    public void setFields(Map<String, String> fields) {
+        this.fields = fields;
+    }
 
     @Override
     public String toString() {
