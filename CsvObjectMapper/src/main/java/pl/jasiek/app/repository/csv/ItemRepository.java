@@ -1,4 +1,4 @@
-package pl.jasiek.app.repository;
+package pl.jasiek.app.repository.csv;
 
 import pl.jasiek.app.model.Item;
 
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ItemRepository {
-    long create(Item item);
+    void create(Item item);
     int generateId();
     void remove(int id);
     void modifyById(int id, Map<String, String> modifiedFields);

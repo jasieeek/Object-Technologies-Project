@@ -2,7 +2,7 @@ package pl.jasiek.app.controller;
 
 import pl.jasiek.app.model.Item;
 import pl.jasiek.app.model.ItemDetails;
-import pl.jasiek.app.repository.ItemRepository;
+import pl.jasiek.app.repository.csv.ItemRepository;
 import pl.jasiek.app.view.View;
 
 import java.util.LinkedHashMap;
@@ -20,7 +20,7 @@ public class ModifyItemCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void run() {
         int id = view.readInt("Type ID of the item to modify");
         showMessage(id);
         repository.modifyById(id, readFields(id));

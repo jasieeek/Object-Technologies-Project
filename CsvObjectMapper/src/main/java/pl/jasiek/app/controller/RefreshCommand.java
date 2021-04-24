@@ -2,7 +2,7 @@ package pl.jasiek.app.controller;
 
 public class RefreshCommand implements Command {
     @Override
-    public void execute() {
+    public void run() {
         System.out.println("Refreshing view...");
     }
 

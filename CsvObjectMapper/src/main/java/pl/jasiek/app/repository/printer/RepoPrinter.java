@@ -1,7 +1,7 @@
 package pl.jasiek.app.repository.printer;
 
 import pl.jasiek.app.model.ItemDetails;
-import pl.jasiek.app.repository.ItemRepository;
+import pl.jasiek.app.repository.csv.ItemRepository;
 
 public class RepoPrinter {
     private static ItemDetails itemDetails;

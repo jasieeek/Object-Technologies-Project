@@ -10,7 +10,7 @@ public class ShowDataModelCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void run() {
         System.out.println("--------------------Data model--------------------\n");
         System.out.println("Model name: " + itemDetails.getName());
         System.out.println("\nModel fields: ");

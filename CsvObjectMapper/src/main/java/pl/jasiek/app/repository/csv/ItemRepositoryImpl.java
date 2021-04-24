@@ -1,19 +1,17 @@
 package pl.jasiek.app.repository.csv;
 
 import pl.jasiek.app.model.Item;
-import pl.jasiek.app.repository.ItemRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ItemRepo implements ItemRepository {
+public class ItemRepositoryImpl implements ItemRepository {
     private List<Item> itemList = new ArrayList<>();
 
     @Override
-    public long create(Item item) {
+    public void create(Item item) {
         itemList.add(item);
-        return 0;
     }
 
     @Override

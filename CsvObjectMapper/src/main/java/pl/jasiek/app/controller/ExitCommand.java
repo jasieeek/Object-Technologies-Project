@@ -1,7 +1,7 @@
 package pl.jasiek.app.controller;
 
 import pl.jasiek.app.mapper.DataMapper;
-import pl.jasiek.app.repository.ItemRepository;
+import pl.jasiek.app.repository.csv.ItemRepository;
 
 public class ExitCommand implements Command {
     private DataMapper dataMapper;
@@ -13,7 +13,7 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void run() {
         System.out.println("Starting saving data...");
         dataMapper.exportItemList(repository.findAll());
         System.out.println("Ending saving data");

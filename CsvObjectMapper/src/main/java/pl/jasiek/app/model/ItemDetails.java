@@ -22,10 +22,6 @@ public class ItemDetails {
         this.fields = fields;
     }
 
-    public static void setInstance(ItemDetails instance) {
-        ItemDetails.instance = instance;
-    }
-
     private static ItemDetails instance = new ItemDetails();
 
     public static ItemDetails getInstance() {

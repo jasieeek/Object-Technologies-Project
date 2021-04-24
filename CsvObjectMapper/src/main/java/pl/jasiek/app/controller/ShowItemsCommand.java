@@ -1,7 +1,7 @@
 package pl.jasiek.app.controller;
 
 import pl.jasiek.app.model.ItemDetails;
-import pl.jasiek.app.repository.ItemRepository;
+import pl.jasiek.app.repository.csv.ItemRepository;
 
 public class ShowItemsCommand implements Command {
     private ItemRepository itemRepository;
@@ -13,7 +13,7 @@ public class ShowItemsCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void run() {
         printDataModelRow();
         itemRepository.findAll().forEach(System.out::println);
         System.out.println("\n--------------------End--------------------\n");

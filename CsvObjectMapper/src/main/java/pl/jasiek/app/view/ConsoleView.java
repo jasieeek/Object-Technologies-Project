@@ -1,6 +1,6 @@
 package pl.jasiek.app.view;
 
-import pl.jasiek.app.view.checker.FieldValueChecker;
+import pl.jasiek.app.view.reader.FieldValueReader;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -19,14 +19,13 @@ public class ConsoleView implements View {
 
     @Override
     public String readFieldValueAsString(String fieldName, String fieldType, boolean isModification) {
-        showLabel(fieldName);
-        String fieldValue = scanner.nextLine();
+        String fieldValue = readString(fieldName);
 
         if (isModification && fieldValue.equals("")) {
             return "0";
         } else {
-            fieldValue = FieldValueChecker.checkEmptyFieldValue(fieldValue);
-            return FieldValueChecker.checkFieldValue(fieldType, fieldValue);
+            fieldValue = FieldValueReader.checkEmptyFieldValue(fieldValue);
+            return FieldValueReader.checkFieldValue(fieldType, fieldValue);
         }
     }
 
@@ -46,11 +45,9 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public void clear() {
-        final int limit = 20;
-        for (int i = 0; i < limit; i++) {
-            System.out.println("\n");
-        }
+    public String readString(String label) {
+        showLabel(label);
+        return scanner.nextLine();
     }
 
     @Override

@@ -3,47 +3,53 @@ package pl.jasiek.app.aspect;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+
+import static pl.jasiek.app.aspect.Colors.ANSI_GREEN;
+import static pl.jasiek.app.aspect.Colors.ANSI_RESET;
 
 @Aspect
 public class LoggerClass {
 
-    @Before(value = "execution(void pl.jasiek.app.controller.ModifyItemCommand.execute(..))")
+    @Pointcut("execution(void pl.jasiek.app.controller.ModifyItemCommand.execute(..))")
+    private void everyItemModifyExecute() {}
+
+    @Pointcut("execution(void pl.jasiek.app.controller.AddItemCommand.execute(..))")
+    private void everyItemAddExecute() {}
+
+    @Pointcut("execution(void pl.jasiek.app.controller.RemoveItemCommand.execute(..))")
+    private void everyItemRemoveExecute() {}
+
+    @Before(value = "everyItemModifyExecute()")
     public void logBeforeItemModification() {
         System.out.println("The item modification starts...");
     }
 
-    @After(value = "execution(void pl.jasiek.app.controller.ModifyItemCommand.execute(..))")
+    @After(value = "everyItemModifyExecute()")
     public void logAfterItemModification() {
-        clean();
-        System.out.println("The item modification has been finished!");
+        Cleaner.clean();
+        System.out.println(ANSI_GREEN + "The item modification has been finished!" + ANSI_RESET);
     }
 
-    @Before(value = "execution(void pl.jasiek.app.controller.AddItemCommand.execute(..))")
+    @Before(value = "everyItemAddExecute()")
     public void logBeforeItemCreating() {
         System.out.println("The item creating starts...");
     }
 
-    @After(value = "execution(void pl.jasiek.app.controller.AddItemCommand.execute(..))")
+    @After(value = "everyItemAddExecute()")
     public void logAfterItemCreating() {
-        clean();
-        System.out.println("The item creating has been finished!");
+        Cleaner.clean();
+        System.out.println(ANSI_GREEN + "The item creating has been finished!" + ANSI_RESET);
     }
 
-    @Before(value = "execution(void pl.jasiek.app.controller.RemoveItemCommand.execute(..))")
+    @Before(value = "everyItemRemoveExecute()")
     public void logBeforeItemRemoving() {
         System.out.println("The item removing starts...");
     }
 
-    @After(value = "execution(void pl.jasiek.app.controller.RemoveItemCommand.execute(..))")
+    @After(value = "everyItemRemoveExecute()")
     public void logAfterItemRemoving() {
-        clean();
-        System.out.println("The item removing has been finished!");
-    }
-
-    private void clean() {
-        final int limit = 25;
-        for (int i = 0; i < limit; i++) {
-            System.out.println("\n");
-        }
+        Cleaner.clean();
+        System.out.println(ANSI_GREEN + "The item removing has been finished!" + ANSI_RESET);
     }
 }

@@ -2,7 +2,7 @@ package pl.jasiek.app;
 
 import pl.jasiek.app.config.Config;
 import pl.jasiek.app.controller.Command;
-import pl.jasiek.app.repository.ItemRepository;
+import pl.jasiek.app.repository.csv.ItemRepository;
 import pl.jasiek.app.view.menu.ConsoleMenu;
 
 import java.util.List;
@@ -19,13 +19,15 @@ public class Main {
         itemRepository = config.initializeRepository();
     }
 
+
+
     public static void main(String[] args) {
         init();
 
         while(true) {
             menu.show(itemRepository, commandList);
             Command command = menu.getChoice(commandList);
-            command.execute();
+            command.run();
         }
     }
 }

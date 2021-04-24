@@ -2,7 +2,7 @@ package pl.jasiek.app.controller;
 
 import pl.jasiek.app.model.Item;
 import pl.jasiek.app.model.ItemDetails;
-import pl.jasiek.app.repository.ItemRepository;
+import pl.jasiek.app.repository.csv.ItemRepository;
 import pl.jasiek.app.view.View;
 
 import java.util.LinkedHashMap;
@@ -21,7 +21,7 @@ public class AddItemCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void run() {
         // wyswietl data model
         Item item = new Item();
         item.setId(repository.generateId());

@@ -1,6 +1,6 @@
 package pl.jasiek.app.controller;
 
-import pl.jasiek.app.repository.ItemRepository;
+import pl.jasiek.app.repository.csv.ItemRepository;
 import pl.jasiek.app.view.View;
 
 public class RemoveItemCommand implements Command {
@@ -13,25 +13,15 @@ public class RemoveItemCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void run() {
         int id = view.readInt("Type ID of the item to remove");
         repository.remove(id);
 //        System.out.println("The item with id " + id + " has been removed");
         view.logging("The item with id " + id + " has been removed!");
-        getIDsRight(id);
     }
 
     @Override
     public String getLabel() {
         return "Remove item";
-    }
-
-    private void getIDsRight(int removedItemID) {
-        repository.findAll().stream()
-                .filter(item -> item.getId() > removedItemID)
-                .forEach(item -> {
-                    int currentID = item.getId();
-                    item.setId(--currentID);
-                });
     }
 }

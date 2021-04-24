@@ -1,7 +1,7 @@
 package pl.jasiek.app.view.menu;
 
 import pl.jasiek.app.controller.Command;
-import pl.jasiek.app.repository.ItemRepository;
+import pl.jasiek.app.repository.csv.ItemRepository;
 import pl.jasiek.app.repository.printer.RepoPrinter;
 import pl.jasiek.app.view.View;
 

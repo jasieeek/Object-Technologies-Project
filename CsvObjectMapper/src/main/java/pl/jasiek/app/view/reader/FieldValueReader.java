@@ -1,10 +1,10 @@
-package pl.jasiek.app.view.checker;
+package pl.jasiek.app.view.reader;
 
 import pl.jasiek.app.view.ConsoleView;
 
 import java.time.Year;
 
-public class FieldValueChecker extends ConsoleView {
+public class FieldValueReader extends ConsoleView {
     public static String checkFieldValue(String fieldType, String value) {
         Object result;
         switch (fieldType) {
