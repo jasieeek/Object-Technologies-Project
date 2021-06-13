@@ -1,8 +1,6 @@
 package pl.jasiek.app.view.menu;
 
 import pl.jasiek.app.controller.Command;
-import pl.jasiek.app.repository.csv.ItemRepository;
-import pl.jasiek.app.repository.printer.RepoPrinter;
 import pl.jasiek.app.view.View;
 
 import java.util.List;
@@ -16,8 +14,7 @@ public class ConsoleMenu {
         this.view = view;
     }
 
-    public void show(ItemRepository itemRepository, List<Command> commandList) {
-        RepoPrinter.print(itemRepository);
+    public void show(List<Command> commandList) {
         for (Command command : commandList) {
             String message = String.format(OPTION_FORMAT, commandList.indexOf(command), command.getLabel());
             view.info(message);

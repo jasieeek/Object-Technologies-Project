@@ -1,60 +1,43 @@
 package pl.jasiek.app.controller;
 
-import pl.jasiek.app.model.Item;
-import pl.jasiek.app.model.ItemDetails;
-import pl.jasiek.app.repository.csv.ItemRepository;
+import pl.jasiek.app.csv.repo2.CsvSimpleRepo;
+import pl.jasiek.app.csv.structure.CsvEntry;
+import pl.jasiek.app.model.Student;
+import pl.jasiek.app.repository.CsvStudentRepository;
 import pl.jasiek.app.view.View;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class ModifyItemCommand implements Command {
     private View view;
-    private ItemRepository repository;
-    private ItemDetails itemDetails;
 
-    public ModifyItemCommand(View view, ItemRepository repository) {
+    public ModifyItemCommand(View view) {
         this.view = view;
-        this.repository = repository;
-        this.itemDetails = ItemDetails.getInstance();
     }
 
     @Override
     public void run() {
-        int id = view.readInt("Type ID of the item to modify");
-        showMessage(id);
-        repository.modifyById(id, readFields(id));
+//        int id = view.readInt("Type ID of the item to modify");
+//        view.logging("The item with id " + id + " has been modified!");
+//        Co zrobic zeby tak uzywac klasy repo np. do zapisu obiektu - stworzyc obiekt klasy Student i przekazac go w parametrze do zapisu
+//        nastepnie repozytorium majace metode save() oraz majaca ( w innej klasie/interfejsie ) generyczna implementacje tej metody dla klasy T
+//        wtedy moglbym sprawdzac poprawnosc klas w relacjach oraz dziedziczeniu
+        CsvSimpleRepo<Student> repo = new CsvSimpleRepo<>();
+        Student student = new Student();
+//        set fields of student...
+        repo.save(student);
+
+
+//        Na ten moment zapis polega na stworzeniu obiektu klasy ogolnej klasy modelowej CsvEntry, czyli klasy przechowujacej liste CsvFieldow
+        CsvStudentRepository csvStudentRepository = new CsvStudentRepository();
+        CsvEntry csvEntry = new CsvEntry();
+        csvEntry.setFields(new ArrayList<>());
+        csvStudentRepository.save(csvEntry);
     }
 
-    private void showMessage(int id) {
-        Item item = repository.findById(id);
-        System.out.println("Item ID: " + id);
-        System.out.println("Current values:");
-        item.getFields().forEach((name, value) -> {
-            System.out.println(name + ": " + value);
-        });
-        System.out.println("\nINFO! EMPTY VALUE = OLD VALUE\n");
-    }
 
     @Override
     public String getLabel() {
         return "Modify item";
-    }
-
-    private Map<String, String> readFields(int id) {
-        Map<String, String> fields = new LinkedHashMap<>();
-        Item item = repository.findById(id);
-        itemDetails.getFields().forEach((key, value) -> {
-            String stringValue = view.readFieldValueAsString("NEW " + key, value, true);
-            if (stringValue.equals("")) {
-                System.out.println("Wrong field type in data model! Please contact a administrator!");
-            } else if (stringValue.equals("0")) {
-                System.out.println(key + " field hasn't been changed!");
-                fields.put(key, item.getFields().get(key));
-            } else {
-                fields.put(key, stringValue);
-            }
-        });
-        return fields;
     }
 }

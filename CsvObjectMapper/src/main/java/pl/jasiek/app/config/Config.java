@@ -1,10 +1,7 @@
 package pl.jasiek.app.config;
 
 import pl.jasiek.app.controller.*;
-import pl.jasiek.app.mapper.DataMapper;
-import pl.jasiek.app.mapper.DataModelMapper;
-import pl.jasiek.app.repository.csv.ItemRepository;
-import pl.jasiek.app.repository.csv.ItemRepositoryImpl;
+import pl.jasiek.app.csv.structure.CsvEntity;
 import pl.jasiek.app.view.ConsoleView;
 import pl.jasiek.app.view.View;
 import pl.jasiek.app.view.menu.ConsoleMenu;
@@ -14,12 +11,11 @@ import java.util.List;
 
 public class Config {
     private View view = new ConsoleView();
-    private ItemRepository itemCsvRepo = new ItemRepositoryImpl();
-    private DataModelMapper dataModelMapper = new DataModelMapper();
-    private DataMapper dataMapper = new DataMapper();
+    private List<CsvEntity> entities = new ArrayList<>();
 
     public Config() {
-        initializeDataModel();
+        initializeEntities();
+//        initializeRepositories();
     }
 
     public ConsoleMenu initializeMenu() {
@@ -28,28 +24,28 @@ public class Config {
 
     public List<Command> initializeCommands(){
         List<Command> commandList = new ArrayList<>();
-        commandList.add(new AddItemCommand(view, itemCsvRepo));
-        commandList.add(new ModifyItemCommand(view, itemCsvRepo));
-        commandList.add(new RemoveItemCommand(view, itemCsvRepo));
+        commandList.add(new AddItemCommand(view));
+        commandList.add(new ShowItemsCommand(view));
+        commandList.add(new ModifyItemCommand(view));
+        commandList.add(new RemoveItemCommand(view));
         commandList.add(new RefreshCommand());
-        commandList.add(new ExitCommand(dataMapper, itemCsvRepo));
+        commandList.add(new ExitCommand());
 
         return commandList;
     }
 
-    public ItemRepository initializeRepository() {
-//        przeniesc do aspektow
-        System.out.println("Starting importing data...");
-        itemCsvRepo.init(dataMapper.importItemList());
-        System.out.println("Ending importing data");
-
-        return itemCsvRepo;
+    private void initializeEntities() {
+// TODO
     }
 
-    private void initializeDataModel() {
-//        przeniesc do aspektow
-        System.out.println("Starting importing data model...");
-        dataModelMapper.importDataModel();
-        System.out.println("Ending importing data model");
-    }
+//    private void initializeRepositories() {
+//        CsvStudentRepository studentRepository = new CsvStudentRepository();
+//        CsvTeacherRepository teacherRepository = new CsvTeacherRepository();
+//        CsvGroupRepository groupRepository = new CsvGroupRepository();
+//
+//        repositories = new ArrayList<>();
+//        repositories.add(studentRepository);
+////        repositories.add(teacherRepository);
+////        repositories.add(groupRepository);
+//    }
 }

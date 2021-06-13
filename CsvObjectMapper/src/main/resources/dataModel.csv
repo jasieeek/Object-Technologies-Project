@@ -1,6 +1,0 @@
-Car
-make,string
-model,string
-productionYear,year
-color,string
-value,double
