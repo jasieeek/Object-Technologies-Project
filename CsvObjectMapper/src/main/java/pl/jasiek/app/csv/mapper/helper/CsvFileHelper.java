@@ -49,7 +49,8 @@ public class CsvFileHelper {
             System.out.println("Creating repository file for " + name + "...");
             Files.createFile(Paths.get(REPOSITORY_PATH + "\\" + name.toLowerCase()));
             PrintWriter pw = new PrintWriter(REPOSITORY_PATH + "\\" + name.toLowerCase());
-            pw.println(fieldNames);
+            pw.println(fieldNames.trim());
+            pw.flush();
             pw.close();
             System.out.println("Creating repository file for " + name + " has been finished!");
         } catch (IOException e) {

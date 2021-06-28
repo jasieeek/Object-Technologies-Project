@@ -6,4 +6,8 @@ public class CsvTeacherRepository extends CsvBaseRepo {
     public CsvTeacherRepository() {
         super("pl.jasiek.app.model.Teacher");
     }
+
+    public CsvTeacherRepository(String csvClassName) {
+        super(csvClassName);
+    }
 }

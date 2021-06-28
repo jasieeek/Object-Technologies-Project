@@ -1,50 +1,57 @@
 package pl.jasiek.app.controller;
 
+import pl.jasiek.app.csv.repo.CsvBaseRepo;
+import pl.jasiek.app.csv.structure.CsvEntry;
 import pl.jasiek.app.repository.CsvAdditionalActivityRepository;
 import pl.jasiek.app.repository.CsvGroupRepository;
 import pl.jasiek.app.repository.CsvStudentRepository;
 import pl.jasiek.app.repository.CsvTeacherRepository;
 import pl.jasiek.app.view.View;
 
-public class RemoveItemCommand implements Command {
+public class FindByIDCommand implements Command {
     private View view;
 
-    public RemoveItemCommand(View view) {
+    public FindByIDCommand(View view) {
         this.view = view;
     }
 
+    @Override
     public void run() {
-        int id = 0;
         System.out.println("[0] Additional activity\n[1] Group\n[2] Student\n[3] Teacher\n");
         switch (view.readInt("CHOOSE")) {
             case 0:
-                id = view.readInt("Type ID of the item to remove");
                 CsvAdditionalActivityRepository csvAdditionalActivityRepository = new CsvAdditionalActivityRepository();
-                csvAdditionalActivityRepository.remove(id);
+                findItem(csvAdditionalActivityRepository);
                 break;
             case 1:
-                id = view.readInt("Type ID of the item to remove");
                 CsvGroupRepository csvGroupRepository = new CsvGroupRepository();
-                csvGroupRepository.remove(id);
+                findItem(csvGroupRepository);
                 break;
             case 2:
-                id = view.readInt("Type ID of the item to remove");
                 CsvStudentRepository csvStudentRepo = new CsvStudentRepository();
-                csvStudentRepo.remove(id);
+                findItem(csvStudentRepo);
                 break;
             case 3:
-                id = view.readInt("Type ID of the item to remove");
                 CsvTeacherRepository csvTeacherRepository = new CsvTeacherRepository();
-                csvTeacherRepository.remove(id);
+                findItem(csvTeacherRepository);
                 break;
             default:
                 System.out.println("Incorrect value! Returning to main menu...");
         }
-        view.logging("The item with id " + id + " has been removed!");
+    }
+
+    private void findItem(CsvBaseRepo repo) {
+        CsvEntry collect = repo.findById(view.readInt("ID"));
+//        zastosuj try/catch
+        if (collect != null) {
+            collect.getFields().forEach(csvField -> System.out.println(csvField.toShortString()));
+        } else {
+            System.out.println("The item hasn't been found!");
+        }
     }
 
     @Override
     public String getLabel() {
-        return "Remove item";
+        return "Find by ID";
     }
 }

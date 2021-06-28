@@ -5,6 +5,7 @@ import pl.jasiek.app.csv.structure.CsvEntry;
 import pl.jasiek.app.csv.structure.CsvField;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public abstract class CsvBaseRepo {
     private String csvClassName;
@@ -17,7 +18,7 @@ public abstract class CsvBaseRepo {
         return CsvRepoEntryHandler.loadEntries(csvClassName);
     }
 
-    public CsvEntry findById(long id) {
+    public CsvEntry findById(long id) throws NoSuchElementException {
         return findAll().stream()
                 .filter(csvEntry -> {
                     CsvField tmpCsvField = csvEntry.getFields().stream()
@@ -28,7 +29,7 @@ public abstract class CsvBaseRepo {
                     return tmpCsvField.getValue().equals(String.valueOf(id));
                 })
                 .findFirst()
-                .orElse(null);
+                .get();
     }
 
     public void save(CsvEntry csvEntry) {

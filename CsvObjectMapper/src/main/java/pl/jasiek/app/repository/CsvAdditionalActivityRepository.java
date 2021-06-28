@@ -2,8 +2,8 @@ package pl.jasiek.app.repository;
 
 import pl.jasiek.app.csv.repo.CsvBaseRepo;
 
-public class CsvAdditionaActivityRepository extends CsvBaseRepo {
-    protected CsvAdditionaActivityRepository() {
+public class CsvAdditionalActivityRepository extends CsvBaseRepo {
+    public CsvAdditionalActivityRepository() {
         super("pl.jasiek.app.model.AdditionalActivity");
     }
 }

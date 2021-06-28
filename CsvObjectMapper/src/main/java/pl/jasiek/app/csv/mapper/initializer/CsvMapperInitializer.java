@@ -8,12 +8,12 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
-public class CsvRepoInitializer {
+public class CsvMapperInitializer {
 
     public static void init() {
         // 1. Iterate whole model catalog: pl.jasiek.app.model
         if (CsvFileHelper.getModelFiles() != null) {
-            Arrays.stream(CsvFileHelper.getModelFiles()).forEach(CsvRepoInitializer::createRepoIfNotExist);
+            Arrays.stream(CsvFileHelper.getModelFiles()).forEach(CsvMapperInitializer::createRepoIfNotExist);
         }
     }
 

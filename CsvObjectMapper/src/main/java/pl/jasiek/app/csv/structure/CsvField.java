@@ -16,4 +16,12 @@ public class CsvField {
     public CsvField(String name) {
         this.name = name;
     }
+
+    public String toShortString() {
+        return name + " = " + value;
+    }
+
+    public String relatedFieldToString() {
+        return "\t" + name + " = " + value;
+    }
 }

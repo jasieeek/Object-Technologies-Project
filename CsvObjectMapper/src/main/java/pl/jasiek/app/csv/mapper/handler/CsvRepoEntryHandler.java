@@ -27,8 +27,8 @@ public class CsvRepoEntryHandler {
         try (BufferedReader br = new BufferedReader(new FileReader(extractRepoPath(csvClassName)))) {
             while ((line = br.readLine()) != null) {
                 startCounter++;
-                // iteruje od drugiego bo pomijam wiersz z nazwami kolumn i pusty
-                if (startCounter > 2) {
+                // iteruje od drugiego bo pomijam wiersz z nazwami kolumn
+                if (startCounter > 1) {
                     CsvEntry tmpCsvEntry = new CsvEntry();
                     String[] splitLine = line.split(COMA);
                     List<CsvField> csvRepoFieldsWithoutValue = extractCsvFieldsWithoutValue(csvClassName);
@@ -47,6 +47,35 @@ public class CsvRepoEntryHandler {
             System.out.println("Error with load csv file");
         }
         return csvEntries;
+    }
+
+    public static void addEntry(String repoClassName, CsvEntry csvEntry) {
+        try {
+            Class<?> clazz = Class.forName(repoClassName);
+            String repoPath = clazz.getAnnotation(CsvClass.class).value();
+//            get existing repository and add row based on csvEntry
+            String existingRepo = extractRepoAsString(repoPath);
+            String updatedRepo = addRowToRepo(existingRepo, csvEntry);
+            Files.write(Paths.get(repoPath), updatedRepo.lines().collect(Collectors.toList()));
+        } catch (ClassNotFoundException e) {
+            System.out.println(repoClassName + " hasn't been found!");
+        } catch (IOException e) {
+            System.out.println("Unable to save file exchanges data :(");
+        }
+    }
+
+    public static void removeEntry(String repoClassName, String id) {
+        try {
+            Class<?> clazz = Class.forName(repoClassName);
+            String repoPath = clazz.getAnnotation(CsvClass.class).value();
+            String existingRepo = extractRepoAsString(repoPath);
+            List<String> updatedRepo = removeRowFromRepo(existingRepo, id);
+            Files.write(Paths.get(repoPath), updatedRepo);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Unable to save file exchanges data :(");
+        }
     }
 
     private static List<CsvField> extractCsvFieldsWithoutValue(String csvClassName) {
@@ -87,35 +116,6 @@ public class CsvRepoEntryHandler {
             e.printStackTrace();
         }
         return result;
-    }
-
-    public static void addEntry(String repoClassName, CsvEntry csvEntry) {
-        try {
-            Class<?> clazz = Class.forName(repoClassName);
-            String repoPath = clazz.getAnnotation(CsvClass.class).value();
-//            get existing repository and add row based on csvEntry
-            String existingRepo = extractRepoAsString(repoPath);
-            String updatedRepo = addRowToRepo(existingRepo, csvEntry);
-            Files.write(Paths.get(repoPath), updatedRepo.lines().collect(Collectors.toList()));
-        } catch (ClassNotFoundException e) {
-            System.out.println(repoClassName + " hasn't been found!");
-        } catch (IOException e) {
-            System.out.println("Unable to save file exchanges data :(");
-        }
-    }
-
-    public static void removeEntry(String repoClassName, String id) {
-        try {
-            Class<?> clazz = Class.forName(repoClassName);
-            String repoPath = clazz.getAnnotation(CsvClass.class).value();
-            String existingRepo = extractRepoAsString(repoPath);
-            List<String> updatedRepo = removeRowFromRepo(existingRepo, id);
-            Files.write(Paths.get(repoPath), updatedRepo);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("Unable to save file exchanges data :(");
-        }
     }
 
     private static List<String> removeRowFromRepo(String existingRepo, String id) {

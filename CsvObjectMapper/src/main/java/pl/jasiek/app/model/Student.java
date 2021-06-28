@@ -15,3 +15,4 @@ public class Student {
     @ManyToOne("students")
     private long idGroup;
 }
+

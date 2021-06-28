@@ -18,7 +18,7 @@ public class ManyToManyHelper {
     }
 
     private static String generateFieldsAsString(Class clazz, String relationshipCsvClassName) {
-        String result = extractClassName(clazz.getName()) + COMMA;
+        String result = "@id" + extractClassName(clazz.getName()) + COMMA;
         result += "@id" + extractClassName(relationshipCsvClassName);
 
         return result;
