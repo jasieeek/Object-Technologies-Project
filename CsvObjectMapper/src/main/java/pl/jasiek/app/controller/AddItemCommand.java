@@ -28,21 +28,25 @@ public class AddItemCommand implements Command {
                 CsvAdditionalActivityRepository csvAdditionalActivityRepository = new CsvAdditionalActivityRepository();
                 CsvEntity csvEntityAdditionalActivity = CsvClassHelper.extractCsvEntity(AdditionalActivity.class.getName());
                 csvAdditionalActivityRepository.save(CsvClassHelper.readCsvEntry(csvEntityAdditionalActivity, view));
+                view.logging("The item of " + AdditionalActivity.class.getName() + " type has been added!");
                 break;
             case 1:
                 CsvGroupRepository csvGroupRepository = new CsvGroupRepository();
                 CsvEntity csvEntityGroup = CsvClassHelper.extractCsvEntity(Group.class.getName());
                 csvGroupRepository.save(CsvClassHelper.readCsvEntry(csvEntityGroup, view));
+                view.logging("The item of " + Group.class.getName() + " type has been added!");
                 break;
             case 2:
                 CsvStudentRepository csvStudentRepo = new CsvStudentRepository();
                 CsvEntity csvEntityStudent = CsvClassHelper.extractCsvEntity(Student.class.getName());
                 csvStudentRepo.save(CsvClassHelper.readCsvEntry(csvEntityStudent, view));
+                view.logging("The item of " + Student.class.getName() + " type has been added!");
                 break;
             case 3:
                 CsvTeacherRepository csvTeacherRepository = new CsvTeacherRepository();
                 CsvEntity csvEntityTeacher = CsvClassHelper.extractCsvEntity(Teacher.class.getName());
                 csvTeacherRepository.save(CsvClassHelper.readCsvEntry(csvEntityTeacher, view));
+                view.logging("The item of " + Teacher.class.getName() + " type has been added!");
                 break;
             default:
                 System.out.println("Incorrect value! Returning to main menu...");
